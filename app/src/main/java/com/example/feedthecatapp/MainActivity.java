@@ -2,6 +2,7 @@ package com.example.feedthecatapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView menuBar = findViewById(R.id.menu_icon);
         ImageView cat = findViewById(R.id.cat_img);
+        ImageView share = findViewById(R.id.share_icon);
         Button feedButton = findViewById(R.id.button);
         TextView count = findViewById(R.id.counter);
         RotateAnimation rotateAnimation = new RotateAnimation(-20, 15, 280, 280);
@@ -42,6 +44,18 @@ public class MainActivity extends AppCompatActivity {
                     rotateAnimation.setDuration(400L);
                     cat.startAnimation(rotateAnimation);
                 }
+            }
+        });
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                String shareRes = "Мой результат в FeedTheCat: " + count.getText().toString() + " очков сытости.";
+
+                shareIntent.putExtra(Intent.EXTRA_TEXT,shareRes);
+                startActivity(Intent.createChooser(shareIntent,"SHARE"));
             }
         });
 
