@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">FeedTheCatApp</string>
+    <string name="app_name">FeedTheCat</string>
+    <string name="button_text">Feed</string>
 </resources>
