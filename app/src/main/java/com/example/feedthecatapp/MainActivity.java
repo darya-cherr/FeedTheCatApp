@@ -1,5 +1,7 @@
 package com.example.feedthecatapp;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -9,7 +11,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +23,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -29,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private final int clickCount = 15;
     private final int repeatCount = 10;
     private TextView count;
+    SharedPreferences sPref;
+    final String SAVED_TEXT = "saved_text";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +52,16 @@ public class MainActivity extends AppCompatActivity {
 
         RotateAnimation rotateAnimation = new RotateAnimation(-20, 15, 280, 280);
 
+        count = findViewById(R.id.counter);
+        sPref = getPreferences(MODE_PRIVATE);
+        String savedText = sPref.getString(SAVED_TEXT, "");
+        count.setText(savedText);
+        Toast.makeText(this, "Text loaded", Toast.LENGTH_SHORT).show();
+
         feedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                count = findViewById(R.id.counter);
                 counter = Integer.parseInt(count.getText().toString());
                 counter++;
                 count.setText(Integer.toString(counter));
@@ -73,8 +88,43 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-
     }
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Toast.makeText(getApplicationContext(), "onPause()", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "onPause()");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        Toast.makeText(getApplicationContext(), "onStop()", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "onStop()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString(SAVED_TEXT, count.getText().toString());
+        ed.commit();
+        Toast.makeText(this, "Text saved", Toast.LENGTH_SHORT).show();
+
+        super.onDestroy();
+        Toast.makeText(getApplicationContext(), "onDestroy()", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "onDestroy()");
+    }
+
+
+
+
+
 
     public void shareClick(){
         count = findViewById(R.id.counter);
@@ -89,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void navigationMenuItemClick(MenuItem item) {
+        count = findViewById(R.id.counter);
         int id = item.getItemId();
         if(id == R.id.menu_about_me){
             Intent intent = new Intent(MainActivity.this, AboutMe.class);
