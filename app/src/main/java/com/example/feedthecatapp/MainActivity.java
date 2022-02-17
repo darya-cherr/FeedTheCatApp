@@ -1,11 +1,17 @@
 package com.example.feedthecatapp;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -22,17 +28,18 @@ public class MainActivity extends AppCompatActivity {
     private int counter;
     private final int clickCount = 15;
     private final int repeatCount = 10;
-
+    private TextView count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         ImageView menuBar = findViewById(R.id.menu_icon);
         ImageView cat = findViewById(R.id.cat_img);
         ImageView share = findViewById(R.id.share_icon);
         Button feedButton = findViewById(R.id.button);
-        TextView count = findViewById(R.id.counter);
+
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 
         RotateAnimation rotateAnimation = new RotateAnimation(-20, 15, 280, 280);
@@ -56,12 +63,7 @@ public class MainActivity extends AppCompatActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                String shareRes = "Мой результат в FeedTheCat: " + count.getText().toString() + " очков сытости.";
-
-                shareIntent.putExtra(Intent.EXTRA_TEXT,shareRes);
-                startActivity(Intent.createChooser(shareIntent,"SHARE"));
+                shareClick();
             }
         });
 
@@ -72,8 +74,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-        navigationView.setItemIconTintList(null);
+    }
+
+    public void shareClick(){
+        count = findViewById(R.id.counter);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        String shareRes = "Мой результат в FeedTheCat: " + count.getText().toString() + " очков сытости.";
+
+        shareIntent.putExtra(Intent.EXTRA_TEXT,shareRes);
+        startActivity(Intent.createChooser(shareIntent,"SHARE"));
+    }
+
+
+
+    public void navigationMenuItemClick(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.menu_about_me){
+            Intent intent = new Intent(MainActivity.this, AboutMe.class);
+            startActivity(intent);
+        }else{
+            if(id == R.id.menu_share)
+            shareClick();
+        }
 
     }
 }

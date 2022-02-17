@@ -3,11 +3,13 @@
 
     <item android:id="@+id/menu_about_me"
         android:icon="@drawable/ic_baseline_info_24"
-        android:title="@string/about" />
+        android:title="@string/about"
+        android:onClick="navigationMenuItemClick"/>
 
     <item android:id="@+id/menu_share"
         android:icon="@drawable/ic_baseline_share"
-        android:title="@string/share"/>
+        android:title="@string/share"
+        android:onClick="navigationMenuItemClick" />
 
 
 </menu>

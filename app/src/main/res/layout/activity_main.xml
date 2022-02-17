@@ -8,7 +8,7 @@
     android:background="@color/white"
     tools:context=".MainActivity" >
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -18,34 +18,6 @@
             layout="@layout/toolbar"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="103dp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/satiety"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toStartOf="@+id/counter"
-                android:layout_marginEnd="15dp"
-                android:text="@string/satiety"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/counter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_alternates_bold"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="15dp"
-                android:text="@string/counter"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
-
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -74,8 +46,39 @@
                 tools:layout_editor_absoluteX="152dp"
                 tools:layout_editor_absoluteY="594dp" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/satiety"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_toStartOf="@+id/counter"
+                    android:text="@string/satiety"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="60dp"
+                    android:fontFamily="@font/montserrat_alternates_bold"
+                    android:text="@string/counter"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+            </RelativeLayout>
+
         </RelativeLayout>
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
