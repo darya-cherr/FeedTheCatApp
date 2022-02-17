@@ -1,6 +1,8 @@
 package com.example.feedthecatapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.material.navigation.NavigationView;
 
 import org.w3c.dom.Text;
 
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView share = findViewById(R.id.share_icon);
         Button feedButton = findViewById(R.id.button);
         TextView count = findViewById(R.id.counter);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+
         RotateAnimation rotateAnimation = new RotateAnimation(-20, 15, 280, 280);
 
         feedButton.setOnClickListener(new View.OnClickListener() {
@@ -62,8 +68,12 @@ public class MainActivity extends AppCompatActivity {
         menuBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setItemIconTintList(null);
+
     }
 }

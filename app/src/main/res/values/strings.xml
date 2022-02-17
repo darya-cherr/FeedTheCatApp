@@ -3,4 +3,6 @@
     <string name="button_text">Feed</string>
     <string name="satiety">Satiety</string>
     <string name="counter">0</string>
+    <string name="about">About Developer</string>
+    <string name="share">Share The Result</string>
 </resources>
