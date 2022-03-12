@@ -10,12 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FeedTheCatApp">
         <activity
+            android:name=".MyResults"
+            android:exported="false" />
+        <activity
             android:name=".AboutMe"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:parentActivityName=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

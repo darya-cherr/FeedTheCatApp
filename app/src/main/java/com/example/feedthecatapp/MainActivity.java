@@ -121,11 +121,6 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "onDestroy()");
     }
 
-
-
-
-
-
     public void shareClick(){
         count = findViewById(R.id.counter);
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -136,8 +131,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(Intent.createChooser(shareIntent,"SHARE"));
     }
 
-
-
     public void navigationMenuItemClick(MenuItem item) {
         count = findViewById(R.id.counter);
         int id = item.getItemId();
@@ -147,6 +140,13 @@ public class MainActivity extends AppCompatActivity {
         }else{
             if(id == R.id.menu_share)
             shareClick();
+            else{
+                if (id == R.id.menu_results){
+                    Intent intent = new Intent(MainActivity.this, MyResults.class);
+                    startActivity(intent);
+                }
+            }
+
         }
 
     }

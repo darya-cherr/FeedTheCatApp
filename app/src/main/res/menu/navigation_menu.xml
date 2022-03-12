@@ -11,5 +11,10 @@
         android:title="@string/share"
         android:onClick="navigationMenuItemClick" />
 
+    <item android:id="@+id/menu_results"
+        android:icon="@drawable/ic_baseline_star_half_24"
+        android:title="@string/results"
+        android:onClick="navigationMenuItemClick" />
+
 
 </menu>
