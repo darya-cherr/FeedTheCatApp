@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:cardElevation="10dp"
-    app:cardBackgroundColor="@color/actionbar">
+    app:cardElevation="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,8 +15,8 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/nameField"
-            android:hint="Name"
+            android:id="@+id/emailField"
+            android:hint="Email"
             android:inputType="textEmailAddress"
             android:text=""
             android:textSize="20sp">

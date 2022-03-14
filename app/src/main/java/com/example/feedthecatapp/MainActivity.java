@@ -40,17 +40,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView count;
     SharedPreferences sPref;
     final String SAVED_TEXT = "saved_text";
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase database;
-    private DatabaseReference users;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
-        users = database.getReference("Users");
 
         setContentView(R.layout.activity_main);
 
@@ -58,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
         ImageView cat = findViewById(R.id.cat_img);
         ImageView share = findViewById(R.id.share_icon);
         Button feedButton = findViewById(R.id.button);
-
-
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 
@@ -106,9 +98,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-       // updateUI(currentUser);
     }
 
 
