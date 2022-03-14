@@ -26,6 +26,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -36,10 +40,17 @@ public class MainActivity extends AppCompatActivity {
     private TextView count;
     SharedPreferences sPref;
     final String SAVED_TEXT = "saved_text";
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+    private DatabaseReference users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        users = database.getReference("Users");
 
         setContentView(R.layout.activity_main);
 
@@ -47,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView cat = findViewById(R.id.cat_img);
         ImageView share = findViewById(R.id.share_icon);
         Button feedButton = findViewById(R.id.button);
+
+
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 
@@ -90,6 +103,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+       // updateUI(currentUser);
+    }
 
 
     @Override
@@ -133,21 +153,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void navigationMenuItemClick(MenuItem item) {
         count = findViewById(R.id.counter);
-        int id = item.getItemId();
-        if(id == R.id.menu_about_me){
-            Intent intent = new Intent(MainActivity.this, AboutMe.class);
-            startActivity(intent);
-        }else{
-            if(id == R.id.menu_share)
-            shareClick();
-            else{
-                if (id == R.id.menu_results){
-                    Intent intent = new Intent(MainActivity.this, MyResults.class);
-                    startActivity(intent);
-                }
-            }
-
+        final int id = item.getItemId();
+        switch (id){
+            case R.id.menu_about_me:
+                Intent intent = new Intent(MainActivity.this, AboutMe.class);
+                startActivity(intent);
+                return;
+            case R.id.menu_share:
+                shareClick();
+                return;
+            case R.id.menu_results:
+                Intent intent1 = new Intent(MainActivity.this, MyResults.class);
+                startActivity(intent1);
+                return;
         }
-
     }
+
 }
