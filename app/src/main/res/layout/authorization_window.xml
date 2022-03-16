@@ -15,7 +15,7 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/emailFieldReg"
+            android:id="@+id/emailFieldAuth"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:text=""
@@ -26,18 +26,7 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/nameField"
-            android:hint="Name"
-            android:inputType="text"
-            android:text=""
-            android:textSize="20sp">
-
-        </androidx.appcompat.widget.AppCompatEditText>
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/passwordFieldReg"
+            android:id="@+id/passwordFieldAuth"
             android:hint="Password"
             android:inputType="textPassword"
             android:text=""
@@ -48,5 +37,6 @@
 
 
     </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>
