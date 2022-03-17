@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView count;
     private FirebaseAuth mAuth;
     private DatabaseReference myRef;
-    FirebaseUser user;
+    private FirebaseUser user;
 
 
     @Override
@@ -138,8 +138,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
+        myRef.setValue(counter);
         super.onPause();
-
     }
 
     @Override
