@@ -12,4 +12,6 @@
     <string name="results">My Results</string>
     <string name="date">Date</string>
     <string name="result">Result</string>
+    <string name="last_game">Last Game:</string>
+    <string name="last_result">0</string>
 </resources>

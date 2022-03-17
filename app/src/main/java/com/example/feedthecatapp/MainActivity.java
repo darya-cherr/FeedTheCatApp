@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,17 +31,22 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
     private final int clickCount = 15;
     private final int repeatCount = 10;
     private TextView count;
+    private TextView lastResult;
     private FirebaseAuth mAuth;
     private DatabaseReference myRef;
     private FirebaseUser user;
+
 
 
     @Override
@@ -68,7 +77,10 @@ public class MainActivity extends AppCompatActivity {
         RotateAnimation rotateAnimation = new RotateAnimation(-20, 15, 280, 280);
 
         count = findViewById(R.id.counter);
+        lastResult = findViewById(R.id.lastResVal);
+
         counter = Integer.parseInt(count.getText().toString());
+
 
         loadResult();
 
@@ -76,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 count = findViewById(R.id.counter);
-
                 counter++;
                 count.setText(Integer.toString(counter));
                 if(counter % clickCount == 0){
@@ -110,24 +121,34 @@ public class MainActivity extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("dd,MM,yyyy");
 
         user = mAuth.getInstance().getCurrentUser();
-        myRef = FirebaseDatabase.getInstance().getReference("Users/" + user.getUid()+"/Results/" + dateFormat.format(currentDate));
+        myRef = FirebaseDatabase.getInstance().getReference("Users/" + user.getUid()+"/Results");
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query lastchield = myRef.limitToLast(2);
+        ArrayList<Integer> results = new ArrayList<>();
+
+        lastchield.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    counter = snapshot.getValue(Integer.class);
+            public void onDataChange(DataSnapshot ds) {
+
+                if(ds.exists()){
+                    for(DataSnapshot das: ds.getChildren()) {
+                        results.add(das.getValue(Integer.class));
+                    }
+                    if(results.size() > 1){
+                        lastResult.setText(results.get(0).toString());
+                        counter = results.get(1);
+                    }else{
+                        counter = results.get(0);
+                    }
                     count.setText(Integer.toString(counter));
                 }else{
-                    myRef.setValue(counter);
+                    myRef.child(dateFormat.format(currentDate)).setValue(counter);
                 }
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-
+            } });
     }
 
     @Override
@@ -138,7 +159,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        myRef.setValue(counter);
+        Date currentDate = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd,MM,yyyy");
+
+        myRef.child(dateFormat.format(currentDate)).setValue(counter);
+
         super.onPause();
     }
 
@@ -152,7 +177,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
 
-        myRef.setValue(counter);
+        Date currentDate = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd,MM,yyyy");
+
+        myRef.child(dateFormat.format(currentDate)).setValue(counter);
 
         super.onDestroy();
     }
