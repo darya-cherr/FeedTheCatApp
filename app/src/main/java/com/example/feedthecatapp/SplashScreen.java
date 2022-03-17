@@ -185,7 +185,9 @@ public class SplashScreen extends AppCompatActivity {
                         users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Snackbar.make(root, "You have successfully registered", Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(root, "You have successfully registered", Snackbar.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                finish();
                             }
                         });
                     }

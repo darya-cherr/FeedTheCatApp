@@ -3,6 +3,7 @@ package com.example.feedthecatapp;
 import static android.content.ContentValues.TAG;
 
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -28,18 +29,27 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private int counter;
     private final int clickCount = 15;
     private final int repeatCount = 10;
     private TextView count;
-    SharedPreferences sPref;
-    final String SAVED_TEXT = "saved_text";
+    private FirebaseAuth mAuth;
+    private DatabaseReference myRef;
+    FirebaseUser user;
 
 
     @Override
@@ -58,16 +68,15 @@ public class MainActivity extends AppCompatActivity {
         RotateAnimation rotateAnimation = new RotateAnimation(-20, 15, 280, 280);
 
         count = findViewById(R.id.counter);
-        sPref = getPreferences(MODE_PRIVATE);
-        String savedText = sPref.getString(SAVED_TEXT, "");
-        count.setText(savedText);
-        Toast.makeText(this, "Text loaded", Toast.LENGTH_SHORT).show();
+        counter = Integer.parseInt(count.getText().toString());
+
+        loadResult();
 
         feedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 count = findViewById(R.id.counter);
-                counter = Integer.parseInt(count.getText().toString());
+
                 counter++;
                 count.setText(Integer.toString(counter));
                 if(counter % clickCount == 0){
@@ -95,6 +104,32 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void loadResult(){
+
+        Date currentDate = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd,MM,yyyy");
+
+        user = mAuth.getInstance().getCurrentUser();
+        myRef = FirebaseDatabase.getInstance().getReference("Users/" + user.getUid()+"/Results/" + dateFormat.format(currentDate));
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    counter = snapshot.getValue(Integer.class);
+                    count.setText(Integer.toString(counter));
+                }else{
+                    myRef.setValue(counter);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -105,29 +140,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        Toast.makeText(getApplicationContext(), "onPause()", Toast.LENGTH_SHORT).show();
-        Log.i(TAG, "onPause()");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        Toast.makeText(getApplicationContext(), "onStop()", Toast.LENGTH_SHORT).show();
-        Log.i(TAG, "onStop()");
+
     }
 
     @Override
     protected void onDestroy() {
-        sPref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putString(SAVED_TEXT, count.getText().toString());
-        ed.commit();
-        Toast.makeText(this, "Text saved", Toast.LENGTH_SHORT).show();
+
+        myRef.setValue(counter);
 
         super.onDestroy();
-        Toast.makeText(getApplicationContext(), "onDestroy()", Toast.LENGTH_SHORT).show();
-        Log.i(TAG, "onDestroy()");
     }
 
     public void shareClick(){
