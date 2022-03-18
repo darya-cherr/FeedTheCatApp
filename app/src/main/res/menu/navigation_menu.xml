@@ -16,5 +16,11 @@
         android:title="@string/results"
         android:onClick="navigationMenuItemClick" />
 
+    <item android:id="@+id/menu_rules"
+        android:icon="@drawable/ic_baseline_rule_24"
+        android:title="@string/rules"
+        android:onClick="navigationMenuItemClick" />
+
+
 
 </menu>

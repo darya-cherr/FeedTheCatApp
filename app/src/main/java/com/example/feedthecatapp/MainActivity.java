@@ -210,6 +210,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(MainActivity.this, MyResults.class);
                 startActivity(intent1);
                 return;
+            case R.id.menu_rules:
+                Intent intent2 = new Intent(MainActivity.this, RulesActivity.class);
+                startActivity(intent2);
+                return;
         }
     }
 

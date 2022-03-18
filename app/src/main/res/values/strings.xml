@@ -14,4 +14,9 @@
     <string name="result">Result</string>
     <string name="last_game">Last Game:</string>
     <string name="last_result">0</string>
+    <string name="rules">Rules</string>
+    <string name="slide1">This is the Cat. The Cat is hungry all the time, so you have to feed him every day, otherwise the cat will be very upset.</string>
+    <string name="slide2">Press the button to feed the Cat. For each click you get 1 satiety point. Every 15 points of satiety, the Cat will dance with happiness.</string>
+    <string name="slide3_text">Satiety: 0</string>
+    <string name="slide3">Every day your counter will be reset to zero. Try to keep your Cat fed.</string>
 </resources>
