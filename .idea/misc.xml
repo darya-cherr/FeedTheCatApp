@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/drawable/circle.xml" value="0.187" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/drawable/circle_dark.xml" value="0.1225" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.2005" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.2095" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.2595" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/drawable/ic_baseline_rule_24.xml" value="0.187" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.2005" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/drawable/ic_baseline_star_half_24.xml" value="0.187" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2595" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/drawable/splash_screen.xml" value="0.1225" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/activity_about_me.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/activity_my_results.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/activity_rules.xml" value="0.23697916666666666" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/authorization_window.xml" value="0.264" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/content_about_me.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/fragment_about.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/fragment_first.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/fragment_second.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/navigation_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/register_window.xml" value="0.23233695652173914" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/slide1.xml" value="0.23697916666666666" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/slide2.xml" value="0.23697916666666666" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/slide3.xml" value="0.23697916666666666" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/layout/toolbar.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/menu/navigation_menu.xml" value="0.234375" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/menu/share_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dasha_2/AndroidStudioProjects/FeedTheCatApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2595" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
